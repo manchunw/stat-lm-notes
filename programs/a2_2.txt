@@ -1,0 +1,125 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> summary(fit)
+Error in summary(fit) : object 'fit' not found
+> load("C:\\Users\\Kelvin\\Documents\\Homework\\Coursework\\yr3sem1\\STAT 331\\a2.RData")
+> summary(fit)
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census + Beds, 
+    data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1658 -0.8085  0.1343  0.5928  2.4293 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.2051282  1.2075929   0.170   0.8654    
+Stay        0.2055252  0.0660885   3.110   0.0024 ** 
+Cultures    0.0590369  0.0103096   5.726  9.5e-08 ***
+Age         0.0173637  0.0229966   0.755   0.4519    
+Census      0.0010306  0.0034942   0.295   0.7686    
+Beds        0.0004476  0.0026781   0.167   0.8676    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9926 on 107 degrees of freedom
+Multiple R-squared:  0.4765,    Adjusted R-squared:  0.4521 
+F-statistic: 19.48 on 5 and 107 DF,  p-value: 9.424e-14
+
+> rt(0.95,3,109)
+numeric(0)
+> ?qt
+starting httpd help server ... done
+> rf(0.95,3,109)
+numeric(0)
+> pf(0.95,3,109)
+[1] 0.580796
+> df(0.95,3,109)
+[1] 0.4793938
+> qf(0.95,3,109)
+[1] 2.687908
+> qf(0.95,5,107)
+[1] 2.299234
+> fm <- lm(InfctRsk ~ Stay + Cultures, data=workdat)
+> summary(fm)
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1822 -0.7275  0.1040  0.6847  2.7143 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.805491   0.487756   1.651    0.102    
+Stay        0.275472   0.052465   5.251 7.46e-07 ***
+Cultures    0.056451   0.009798   5.761 7.70e-08 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.003 on 110 degrees of freedom
+Multiple R-squared:  0.4504,    Adjusted R-squared:  0.4404 
+F-statistic: 45.07 on 2 and 110 DF,  p-value: 5.04e-15
+
+> fm2 <- lm(InfctRsk ~ Age + Census + Beds, data=workdat)
+> summary(fm2)
+
+Call:
+lm(formula = InfctRsk ~ Age + Census + Beds, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6403 -0.7979  0.1040  0.6936  3.7543 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  3.438828   1.437121   2.393   0.0184 *
+Age          0.006045   0.026568   0.228   0.8204  
+Census       0.006584   0.003966   1.660   0.0998 .
+Beds        -0.002640   0.003163  -0.835   0.4058  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.252 on 109 degrees of freedom
+Multiple R-squared:  0.1514,    Adjusted R-squared:  0.128 
+F-statistic: 6.481 on 3 and 109 DF,  p-value: 0.0004456
+
+> qf(0.95,5,109)
+[1] 2.297642
+> qf(0.95,3,109)
+[1] 2.687908
+> plot(fitted(fm),rstudent(fm),xlab="fitted",ylab="studentized residual")
+> qqnorm(rstudent(fm))
+> qqline(rstudent(fm))
+> plot(fm,which=2)
+> qqPlot(fm)
+Error: could not find function "qqPlot"
+> qqplot(fm)
+Error in rank(x, ties.method = "min", na.last = "keep") : 
+  unimplemented type 'list' in 'greater'
+> plot(fitted(fm),rstudent(fm),xlab="fitted",ylab="studentized residual")
+> qqnorm(rstudent(fm))
+> plot(fm,which=2)
+> qqnorm(rstudent(fm))
+> qqline(rstudent(fm))
+> plot(fitted(fm),rstudent(fm),xlab="fitted",ylab="studentized residual")
+> abline(h=c(-2, 2), lty=2)
+> 

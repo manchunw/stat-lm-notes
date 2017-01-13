@@ -1,0 +1,103 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> setwd("C:\\Users\\Kelvin\\Documents\\Homework\\Coursework\\yr3sem1\\STAT 331")
+> workdat <- read.table("Copier.txt", header=T)
+> fix(workdat)
+> x <- workdat$Serviced
+> y <- workdat$Minutes
+> plot(x,y, main="", ylab="Total number of minutes spent", xlab="Number of copiers serviced")
+> n <- length(x)
+> b1 <- (sum(x*y)-n*mean(x)*mean(y))/(sum(x^2)-n*(mean(x))^2)
+> b0 <- mean(y)-b1*mean(x)
+> abline(a=b0, b=b1)
+> b0
+[1] -0.5801567
+> b1
+[1] 15.03525
+> fm <- lm(formula = Minutes ~ Serviced, data = workdat)
+> fm
+
+Call:
+lm(formula = Minutes ~ Serviced, data = workdat)
+
+Coefficients:
+(Intercept)     Serviced  
+    -0.5802      15.0352  
+
+> b1+b0
+[1] 14.45509
+> yhat <- b0+b1*x
+> points(x,yhat,cex=1,col=2,pch=19)
+> s2 <- sum((y-yhat)^2)/(n-2)
+> s2
+[1] 79.45063
+> s <- sqrt(s2)
+> s
+[1] 8.913508
+> sxx <- sum(x^2) - n*(mean(x))^2
+> mean(y)+qt(0.025,n-2)*s
+[1] 58.29086
+> mean(y)-qt(0.025,n-2)*s
+[1] 94.24247
+> seb1hat <- sqrt(s^2/sxx)
+> b1+qt(0.025,n-2)*seb1hat
+[1] 14.06101
+> b1-qt(0.025,n-2)*seb1hat
+[1] 16.00949
+> seb0hat <- sqrt(s^2*(1/n+mean(x)^2/sxx))
+> b0+qt(0.025,n-2)*seb0hat
+[1] -6.234843
+> b0-qt(0.025,n-2)*seb0hat
+[1] 5.074529
+> summary(fm)
+
+Call:
+lm(formula = Minutes ~ Serviced, data = workdat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.7723  -3.7371   0.3334   6.3334  15.4039 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -0.5802     2.8039  -0.207    0.837    
+Serviced     15.0352     0.4831  31.123   <2e-16 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 8.914 on 43 degrees of freedom
+Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9565 
+F-statistic: 968.7 on 1 and 43 DF,  p-value: < 2.2e-16
+
+> s2
+[1] 79.45063
+> mean(x)
+[1] 5.111111
+> sxx
+[1] 340.4444
+> b0
+[1] -0.5801567
+> b1
+[1] 15.03525
+> qt(0.025,43)
+[1] -2.016692
+> b0+b1*5+qt(0.025,43)*sqrt(s^2*(1+1/43+(5-mean(x))^2/sxx))
+[1] 56.41214
+> b0+b1*5-qt(0.025,43)*sqrt(s^2*(1+1/43+(5-mean(x))^2/sxx))
+[1] 92.78003
+> 

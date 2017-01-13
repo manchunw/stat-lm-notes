@@ -1,0 +1,174 @@
+> math=read.delim("C://Users/Kelvin/Documents/Homework/Coursework/yr3sem1/STAT 331/math.txt")
+> 
+> attach(math)
+> 
+> GPA.temp = GPA[1]
+> region.temp = region[1]
+> group=1
+> 
+> for (i in 2:length(income))
++ {
++ if (GPA.temp!= GPA[i] | region.temp != region[i])
++ {
++ GPA.temp = GPA[i]
++ region.temp = region[i]
++ group=c(group,group[length(group)]+1)
++ }else
++ {
++ group=c(group,group[length(group)])
++ }
++ 
++ }
+> 
+> k=max(group)
+> n=length(income)
+> 
+> group.mean=numeric(0)
+> 
+> for (j in 1:k)
++ {
++ group.mean=c(group.mean,mean(income[group==j]))
++ }
+> 
+> SSE.beta = 0
+> 
+> for (j in 1:k)
++ {
++ SSE.beta=SSE.beta + sum((income[group==j]-group.mean[j])^2)
++ }
+> 
+> beta=c()
+> beta[1]=coef(lm(income~GPA+region))[1]
+> beta[2]=coef(lm(income~GPA+region))[2]
+> beta[3]=coef(lm(income~GPA+region))[3]
+> SSE.betaA=0
+> for (i in 1:length(income))
++ {
++ SSE.betaA=SSE.betaA + sum((income[i]-beta[1]-beta[2]*GPA[i]-beta[3]*region[i])^2)
++ }
+> 
+> fitStat=((SSE.betaA-SSE.beta)/(k-3))/(SSE.beta/(n-k))
+> SSE.betaA
+[1] 1079.777
+> SSE.beta
+[1] 655.5462
+> SSE.betaA-SSE.beta
+[1] 424.2311
+> k-3
+[1] 9
+> n-k
+[1] 36
+> fitStat
+[1] 2.588565
+> qf(0.95,k-3,n-k)
+[1] 2.152607
+> fitStat>qf(0.95,k-3,n-k)
+[1] TRUE
+> 
+> 
+> interaction=c()
+> for (i in 1:length(income))
++ {
++ interaction[i]=GPA[i]*region[i]
++ }
+> math$interaction=interaction
+> beta[1]=coef(lm(income~GPA+region+interaction))[1]
+> beta[2]=coef(lm(income~GPA+region+interaction))[2]
+> beta[3]=coef(lm(income~GPA+region+interaction))[3]
+> beta[4]=coef(lm(income~GPA+region+interaction))[4]
+> SSE.betaA=0
+> for (i in 1:length(income))
++ {
++ SSE.betaA=SSE.betaA + sum((income[i]-beta[1]-beta[2]*GPA[i]-beta[3]*region[i]-beta[4]*interaction[i])^2)
++ }
+> fitStat=((SSE.betaA-SSE.beta)/(k-3))/(SSE.beta/(n-k))
+> SSE.betaA
+[1] 805.8182
+> SSE.beta
+[1] 655.5462
+> SSE.betaA-SSE.beta
+[1] 150.2719
+> k-4
+[1] 8
+> n-k
+[1] 36
+> fitStat
+[1] 0.9169264
+> qf(0.95,k-4,n-k)
+[1] 2.208518
+> fitStat>qf(0.95,k-4,n-k)
+[1] FALSE
+> fit2=lm(income~GPA+region+interaction)
+> summary(fit2)
+
+Call:
+lm(formula = income ~ GPA + region + interaction)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.2430 -2.9001 -0.4748  3.0308  7.6898 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   45.148      8.994   5.020 9.03e-06 ***
+GPA            2.090      2.557   0.817 0.418125    
+region       -51.219     12.719  -4.027 0.000220 ***
+interaction   13.989      3.617   3.868 0.000359 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.279 on 44 degrees of freedom
+Multiple R-squared:  0.4974,    Adjusted R-squared:  0.4631 
+F-statistic: 14.51 on 3 and 44 DF,  p-value: 1.038e-06
+
+> plot(fitted(fit2), rstudent(fit2), type="n", xlab="fitted", ylab="studentized residual")
+> text(fitted(fit2), rstudent(fit2))
+> abline(h=c(-2, 2), lty=2)
+> plot(fit2,which=4)
+> cooks.distance(fit2)
+           1            2            3            4            5 
+0.0002655133 0.0403903169 0.0218319185 0.0057680291 0.0472260854 
+           6            7            8            9           10 
+0.0030407146 0.0798065934 0.0098983688 0.0353912394 0.0297683383 
+          11           12           13           14           15 
+0.0002262542 0.0032079071 0.0003894004 0.0056939734 0.0042379343 
+          16           17           18           19           20 
+0.0022641241 0.0087778324 0.0128858112 0.0151649353 0.0238716274 
+          21           22           23           24           25 
+0.0416465725 0.0170422640 0.0217114215 0.0203429811 0.0015075281 
+          26           27           28           29           30 
+0.0303510141 0.0400418739 0.0134417561 0.0425906133 0.0272787864 
+          31           32           33           34           35 
+0.0004438892 0.0176659673 0.0129286003 0.0434491657 0.0093163603 
+          36           37           38           39           40 
+0.0046522873 0.0006119215 0.0159783489 0.0031094007 0.0061026951 
+          41           42           43           44           45 
+0.0694532653 0.0041458035 0.0649058973 0.0655270447 0.0130720595 
+          46           47           48 
+0.0154642144 0.0119710767 0.0000358506 
+> which(cooks.distance(fit2)>qf(0.05,4,n-4))
+named integer(0)
+> 
+> install.packages("car")
+Installing package into ‘C:/Users/User/Documents/R/win-library/3.1’
+(as ‘lib’ is unspecified)
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.utstat.utoronto.ca/bin/windows/contrib/3.1/car_2.0-22.zip'
+Content type 'application/zip' length 1376619 bytes (1.3 Mb)
+opened URL
+downloaded 1.3 Mb
+
+package ‘car’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\User\AppData\Local\Temp\RtmpCCkpN5\downloaded_packages
+> library(car)
+Warning message:
+package ‘car’ was built under R version 3.1.2 
+> crPlots(fit2)
+Warning messages:
+1: In smoother(.x, partial.res[, var], col = col.lines[2], log.x = FALSE,  :
+  could not fit smooth
+2: In smoother(.x, partial.res[, var], col = col.lines[2], log.x = FALSE,  :
+  could not fit smooth
+>  

@@ -1,0 +1,519 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> setwd("Users/Kelvin/Documents/Homework/Coursework/yr3sem1/STAT 331")
+Error in setwd("Users/Kelvin/Documents/Homework/Coursework/yr3sem1/STAT 331") : 
+  cannot change working directory
+> setwd("/Users/Kelvin/Documents/Homework/Coursework/yr3sem1/STAT 331")
+> workdat <- read.table("Senic.txt", header=T)
+> pairs(workdat)
+
+> > plot(workdat$Stay, workdat$InfctRisk, xlab="Stay", ylab="InfctRisk")
+> plot(workdat$Cultures, workdat$InfctRisk, xlab="Cultures", ylab="InfctRisk")
+> plot(workdat$Age, workdat$InfctRisk, xlab="Age", ylab="InfctRisk")
+> plot(workdat$Census, workdat$InfctRisk, xlab="Census", ylab="InfctRisk")
+> plot(workdat$Beds, workdat$InfctRisk, xlab="Beds", ylab="InfctRisk")
+> fit<-lm(Price~Stay+Cultures+Age+Census+Beds, data=hp)
+Error in is.data.frame(data) : object 'hp' not found
+> fit<-lm(Price~Stay+Cultures+Age+Census+Beds, data=datadat)
+Error in is.data.frame(data) : object 'datadat' not found
+> fit<-lm(Price~Stay+Cultures+Age+Census+Beds, data=workdat)
+Error in eval(expr, envir, enclos) : object 'Price' not found
+> fit<-lm(InfctRisk~Stay+Cultures+Age+Census+Beds, data=workdat)
+Error in eval(expr, envir, enclos) : object 'InfctRisk' not found
+> head(workdat)
+  ID  Stay  Age InfctRsk Cultures Xrays Beds MedSchl Region Census Nurses
+1  1  7.13 55.7      4.1      9.0  39.6  279       2      4    207    241
+2  2  8.82 58.2      1.6      3.8  51.7   80       2      2     51     52
+3  3  8.34 56.9      2.7      8.1  74.0  107       2      3     82     54
+4  4  8.95 53.7      5.6     18.9 122.8  147       2      4     53    148
+5  5 11.20 56.5      5.7     34.5  88.9  180       2      1    134    151
+6  6  9.76 50.9      5.1     21.9  97.0  150       2      2    147    106
+  Services
+1       60
+2       40
+3       20
+4       40
+5       40
+6       40
+> fit<-lm(InfctRsk~Stay+Cultures+Age+Census+Beds, data=workdat)
+> summary(lm)
+Error in object[[i]] : object of type 'closure' is not subsettable
+> summary(fit)
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census + Beds, 
+    data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1658 -0.8085  0.1343  0.5928  2.4293 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.2051282  1.2075929   0.170   0.8654    
+Stay        0.2055252  0.0660885   3.110   0.0024 ** 
+Cultures    0.0590369  0.0103096   5.726  9.5e-08 ***
+Age         0.0173637  0.0229966   0.755   0.4519    
+Census      0.0010306  0.0034942   0.295   0.7686    
+Beds        0.0004476  0.0026781   0.167   0.8676    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9926 on 107 degrees of freedom
+Multiple R-squared:  0.4765,    Adjusted R-squared:  0.4521 
+F-statistic: 19.48 on 5 and 107 DF,  p-value: 9.424e-14
+
+> coef(fit)[2]
+     Stay 
+0.2055252 
+> coef(fit)[3]
+  Cultures 
+0.05903693 
+> dim(workdat)
+[1] 113  12
+> a <- c(7,9,56,200,250)
+> a
+[1]   7   9  56 200 250
+> head(workdat)
+  ID  Stay  Age InfctRsk Cultures Xrays Beds MedSchl Region Census Nurses
+1  1  7.13 55.7      4.1      9.0  39.6  279       2      4    207    241
+2  2  8.82 58.2      1.6      3.8  51.7   80       2      2     51     52
+3  3  8.34 56.9      2.7      8.1  74.0  107       2      3     82     54
+4  4  8.95 53.7      5.6     18.9 122.8  147       2      4     53    148
+5  5 11.20 56.5      5.7     34.5  88.9  180       2      1    134    151
+6  6  9.76 50.9      5.1     21.9  97.0  150       2      2    147    106
+  Services
+1       60
+2       40
+3       20
+4       40
+5       40
+6       40
+> X <- workdat[,c(2,5,3,10,7)]
+> X
+     Stay Cultures  Age Census Beds
+1    7.13      9.0 55.7    207  279
+2    8.82      3.8 58.2     51   80
+3    8.34      8.1 56.9     82  107
+4    8.95     18.9 53.7     53  147
+5   11.20     34.5 56.5    134  180
+6    9.76     21.9 50.9    147  150
+7    9.68     16.7 57.8    151  186
+8   11.18     60.5 45.7    399  640
+9    8.67     24.4 48.2    130  182
+10   8.84     29.6 56.3     59   85
+11  11.07     28.5 53.2    591  768
+12   8.30      6.8 57.2    105  167
+13  12.78     46.0 56.8    252  322
+14   7.58     20.8 56.7     59   97
+15   9.00     14.6 56.3     61   72
+16  11.08     18.6 50.2    326  387
+17   8.28     26.0 48.1     84  108
+18  11.62     25.5 53.9    113  133
+19   9.06      6.9 52.8    103  134
+20   9.35     15.9 53.8    547  833
+21   7.53     23.1 42.0     47   95
+22  10.24     36.3 49.0    163  195
+23   9.78     17.6 52.3    240  270
+24   9.84     12.0 62.2    468  600
+25   9.20     17.5 52.2    244  298
+26   8.28     12.0 49.5    413  546
+27   9.31     30.2 47.2    124  170
+28   8.19     10.8 52.1    156  176
+29  11.65     18.6 54.5    217  248
+30   9.89     17.7 50.5    113  167
+31  11.03     19.7 49.9    270  318
+32   9.84     17.7 53.0    200  210
+33  11.77     17.3 54.1    164  196
+34  13.59     24.2 54.0    258  312
+35   9.74     11.4 54.4    170  221
+36  10.33     21.2 55.8    181  266
+37   9.97     16.5 58.2     69   90
+38   7.84      7.1 49.1     50   60
+39  10.47      5.7 53.2    168  196
+40   8.16      1.9 60.9     49   73
+41   8.48     12.1 51.1    145  166
+42  10.72     23.2 53.8     90  113
+43  11.20      7.0 45.0     95  130
+44  10.12     14.9 51.7    313  362
+45   8.37     15.1 50.7     96  115
+46  10.16      8.4 54.2    581  831
+47  19.56     17.2 59.9    273  306
+48  10.90     10.6 57.2    446  593
+49   7.67      2.5 51.7     93  106
+50   8.88     10.1 51.5    238  305
+51  11.48     20.3 57.6    207  252
+52   9.23     11.6 51.6    413  620
+53  11.41     16.6 61.1    330  535
+54  12.07     52.4 43.7    115  157
+55   8.63      8.4 54.0     39   76
+56  11.15      7.7 56.5    217  281
+57   7.14      2.6 59.0     37   70
+58   7.65     16.4 47.1    265  318
+59  10.73     19.3 50.6    374  445
+60  11.46     15.6 56.9    153  191
+61  10.42      8.0 58.0     67  119
+62  11.18     18.8 51.0    546  595
+63   7.93      7.5 64.1     42   68
+64   9.66      9.9 52.1     66   83
+65   7.78     20.9 45.5    391  489
+66   9.42     24.8 50.6    421  508
+67  10.02      8.3 49.5    191  265
+68   8.58      7.4 55.0    248  304
+69   9.61      6.9 52.4    404  487
+70   8.03     24.3 54.2     65   97
+71   7.39     14.6 51.0     38   72
+72   7.08     12.3 52.0     52   87
+73   9.53     15.0 51.5    241  298
+74  10.05     36.7 52.0    144  184
+75   8.45     12.9 38.8    143  235
+76   6.70     13.0 48.6     51   76
+77   8.90     12.7 49.7     37   52
+78  10.23      9.9 53.2    595  752
+79   8.88     14.1 55.8    165  237
+80  10.30     27.8 59.6    113  175
+81  10.79      2.6 44.2    320  461
+82   7.94      6.2 49.5    139  195
+83   7.63     11.6 52.1    109  197
+84   8.77      5.2 54.5     85  143
+85   8.09      7.6 56.9     61   92
+86   9.05     20.5 51.2    127  195
+87   7.91     11.9 52.8    349  477
+88  10.39     14.0 54.6    223  353
+89   9.36     18.3 54.1    127  165
+90  11.41     23.8 50.4    359  424
+91   8.86      9.5 51.3     65  100
+92   8.93      6.2 56.0     59   95
+93   8.92      2.2 53.9     40   56
+94   8.15     12.3 54.9     55   99
+95   9.77     15.7 50.2    123  154
+96   8.54     27.0 56.1     57   98
+97   8.66      6.8 52.8    178  246
+98  12.01     10.8 52.8    237  298
+99   7.95      4.6 51.8    128  163
+100 10.15     16.4 51.9    452  568
+101  9.76      6.9 53.2     47   64
+102  9.89     11.8 45.2    141  190
+103  7.14     13.1 57.6     40   92
+104 13.95     15.6 65.9    308  356
+105  9.44     10.9 52.5    230  297
+106 10.80      1.6 63.9     69  130
+107  7.14      4.1 51.7     90  115
+108  8.02      3.8 55.0     44   91
+109 11.80      9.1 53.8    441  571
+110  9.50     42.0 49.3     68   98
+111  7.70     12.2 56.9     85  129
+112 17.94     26.4 56.2    791  835
+113  9.41     20.6 59.5     20   29
+> t <- t(a) %*% solve(t(X) %*% X) %*% a
+Error in t(X) %*% X : requires numeric/complex matrix/vector arguments
+> dim(X)
+[1] 113   5
+> X <- as.matrix(cbind(1, X))
+> dim(X)
+[1] 113   6
+> X
+       1  Stay Cultures  Age Census Beds
+  [1,] 1  7.13      9.0 55.7    207  279
+  [2,] 1  8.82      3.8 58.2     51   80
+  [3,] 1  8.34      8.1 56.9     82  107
+  [4,] 1  8.95     18.9 53.7     53  147
+  [5,] 1 11.20     34.5 56.5    134  180
+  [6,] 1  9.76     21.9 50.9    147  150
+  [7,] 1  9.68     16.7 57.8    151  186
+  [8,] 1 11.18     60.5 45.7    399  640
+  [9,] 1  8.67     24.4 48.2    130  182
+ [10,] 1  8.84     29.6 56.3     59   85
+ [11,] 1 11.07     28.5 53.2    591  768
+ [12,] 1  8.30      6.8 57.2    105  167
+ [13,] 1 12.78     46.0 56.8    252  322
+ [14,] 1  7.58     20.8 56.7     59   97
+ [15,] 1  9.00     14.6 56.3     61   72
+ [16,] 1 11.08     18.6 50.2    326  387
+ [17,] 1  8.28     26.0 48.1     84  108
+ [18,] 1 11.62     25.5 53.9    113  133
+ [19,] 1  9.06      6.9 52.8    103  134
+ [20,] 1  9.35     15.9 53.8    547  833
+ [21,] 1  7.53     23.1 42.0     47   95
+ [22,] 1 10.24     36.3 49.0    163  195
+ [23,] 1  9.78     17.6 52.3    240  270
+ [24,] 1  9.84     12.0 62.2    468  600
+ [25,] 1  9.20     17.5 52.2    244  298
+ [26,] 1  8.28     12.0 49.5    413  546
+ [27,] 1  9.31     30.2 47.2    124  170
+ [28,] 1  8.19     10.8 52.1    156  176
+ [29,] 1 11.65     18.6 54.5    217  248
+ [30,] 1  9.89     17.7 50.5    113  167
+ [31,] 1 11.03     19.7 49.9    270  318
+ [32,] 1  9.84     17.7 53.0    200  210
+ [33,] 1 11.77     17.3 54.1    164  196
+ [34,] 1 13.59     24.2 54.0    258  312
+ [35,] 1  9.74     11.4 54.4    170  221
+ [36,] 1 10.33     21.2 55.8    181  266
+ [37,] 1  9.97     16.5 58.2     69   90
+ [38,] 1  7.84      7.1 49.1     50   60
+ [39,] 1 10.47      5.7 53.2    168  196
+ [40,] 1  8.16      1.9 60.9     49   73
+ [41,] 1  8.48     12.1 51.1    145  166
+ [42,] 1 10.72     23.2 53.8     90  113
+ [43,] 1 11.20      7.0 45.0     95  130
+ [44,] 1 10.12     14.9 51.7    313  362
+ [45,] 1  8.37     15.1 50.7     96  115
+ [46,] 1 10.16      8.4 54.2    581  831
+ [47,] 1 19.56     17.2 59.9    273  306
+ [48,] 1 10.90     10.6 57.2    446  593
+ [49,] 1  7.67      2.5 51.7     93  106
+ [50,] 1  8.88     10.1 51.5    238  305
+ [51,] 1 11.48     20.3 57.6    207  252
+ [52,] 1  9.23     11.6 51.6    413  620
+ [53,] 1 11.41     16.6 61.1    330  535
+ [54,] 1 12.07     52.4 43.7    115  157
+ [55,] 1  8.63      8.4 54.0     39   76
+ [56,] 1 11.15      7.7 56.5    217  281
+ [57,] 1  7.14      2.6 59.0     37   70
+ [58,] 1  7.65     16.4 47.1    265  318
+ [59,] 1 10.73     19.3 50.6    374  445
+ [60,] 1 11.46     15.6 56.9    153  191
+ [61,] 1 10.42      8.0 58.0     67  119
+ [62,] 1 11.18     18.8 51.0    546  595
+ [63,] 1  7.93      7.5 64.1     42   68
+ [64,] 1  9.66      9.9 52.1     66   83
+ [65,] 1  7.78     20.9 45.5    391  489
+ [66,] 1  9.42     24.8 50.6    421  508
+ [67,] 1 10.02      8.3 49.5    191  265
+ [68,] 1  8.58      7.4 55.0    248  304
+ [69,] 1  9.61      6.9 52.4    404  487
+ [70,] 1  8.03     24.3 54.2     65   97
+ [71,] 1  7.39     14.6 51.0     38   72
+ [72,] 1  7.08     12.3 52.0     52   87
+ [73,] 1  9.53     15.0 51.5    241  298
+ [74,] 1 10.05     36.7 52.0    144  184
+ [75,] 1  8.45     12.9 38.8    143  235
+ [76,] 1  6.70     13.0 48.6     51   76
+ [77,] 1  8.90     12.7 49.7     37   52
+ [78,] 1 10.23      9.9 53.2    595  752
+ [79,] 1  8.88     14.1 55.8    165  237
+ [80,] 1 10.30     27.8 59.6    113  175
+ [81,] 1 10.79      2.6 44.2    320  461
+ [82,] 1  7.94      6.2 49.5    139  195
+ [83,] 1  7.63     11.6 52.1    109  197
+ [84,] 1  8.77      5.2 54.5     85  143
+ [85,] 1  8.09      7.6 56.9     61   92
+ [86,] 1  9.05     20.5 51.2    127  195
+ [87,] 1  7.91     11.9 52.8    349  477
+ [88,] 1 10.39     14.0 54.6    223  353
+ [89,] 1  9.36     18.3 54.1    127  165
+ [90,] 1 11.41     23.8 50.4    359  424
+ [91,] 1  8.86      9.5 51.3     65  100
+ [92,] 1  8.93      6.2 56.0     59   95
+ [93,] 1  8.92      2.2 53.9     40   56
+ [94,] 1  8.15     12.3 54.9     55   99
+ [95,] 1  9.77     15.7 50.2    123  154
+ [96,] 1  8.54     27.0 56.1     57   98
+ [97,] 1  8.66      6.8 52.8    178  246
+ [98,] 1 12.01     10.8 52.8    237  298
+ [99,] 1  7.95      4.6 51.8    128  163
+[100,] 1 10.15     16.4 51.9    452  568
+[101,] 1  9.76      6.9 53.2     47   64
+[102,] 1  9.89     11.8 45.2    141  190
+[103,] 1  7.14     13.1 57.6     40   92
+[104,] 1 13.95     15.6 65.9    308  356
+[105,] 1  9.44     10.9 52.5    230  297
+[106,] 1 10.80      1.6 63.9     69  130
+[107,] 1  7.14      4.1 51.7     90  115
+[108,] 1  8.02      3.8 55.0     44   91
+[109,] 1 11.80      9.1 53.8    441  571
+[110,] 1  9.50     42.0 49.3     68   98
+[111,] 1  7.70     12.2 56.9     85  129
+[112,] 1 17.94     26.4 56.2    791  835
+[113,] 1  9.41     20.6 59.5     20   29
+> t <- t(a) %*% solve(t(X) %*% X) %*% a
+Error in t(a) %*% solve(t(X) %*% X) : non-conformable arguments
+> a
+[1]   7   9  56 200 250
+> a <- as.matrix(cbind(1, a))
+> a
+         a
+[1,] 1   7
+[2,] 1   9
+[3,] 1  56
+[4,] 1 200
+[5,] 1 250
+> X <- workdat[,c(2,5,3,10,7)]
+> X <- as.matrix(X)
+> head(X)
+      Stay Cultures  Age Census Beds
+[1,]  7.13      9.0 55.7    207  279
+[2,]  8.82      3.8 58.2     51   80
+[3,]  8.34      8.1 56.9     82  107
+[4,]  8.95     18.9 53.7     53  147
+[5,] 11.20     34.5 56.5    134  180
+[6,]  9.76     21.9 50.9    147  150
+> a <- c(7,9,56,200,250)
+> a <- as.matrix(a)
+> a
+     [,1]
+[1,]    7
+[2,]    9
+[3,]   56
+[4,]  200
+[5,]  250
+> t <- t(a) %*% solve(t(X) %*% X) %*% a
+> t
+           [,1]
+[1,] 0.05052735
+> t <- as.numeric(t)
+> t
+[1] 0.05052735
+> source("C:\\Users\\Kelvin\\Documents\\Homework\\Coursework\\yr3sem1\\STAT 331\\tutorial2\\T2.R")
+Error in setwd("/Users/YEYING/Desktop/STAT331/tutorial") : 
+  cannot change working directory
+
+> > n <- nrow(X)
+> p <- ncol(X)-1
+> n
+[1] 113
+> p
+[1] 4
+> p <- p+`
++ 1`
+Error: object '\n1' not found
+> p <- p+1
+> p
+[1] 5
+> p <- ncol(X)-1
+> Y <- workdat$headcirc
+> Y <- workdat$InfctRsk
+> Y
+  [1] 4.1 1.6 2.7 5.6 5.7 5.1 4.6 5.4 4.3 6.3 4.9 4.3 7.7 3.7 4.2 5.5 4.5 6.4
+ [19] 4.2 4.1 4.2 4.8 5.0 4.8 4.0 3.9 4.5 3.2 4.4 4.9 5.0 5.2 5.3 6.1 6.3 5.0
+ [37] 2.8 4.6 4.1 1.3 3.7 4.7 3.0 5.6 5.5 4.6 6.5 5.5 1.8 4.2 5.6 4.3 7.6 7.8
+ [55] 3.1 3.9 3.7 4.3 3.9 4.5 3.4 5.7 5.4 4.4 5.0 4.3 4.4 3.7 4.5 3.5 4.2 2.0
+ [73] 5.2 4.5 3.4 4.5 2.9 4.9 4.4 5.1 2.9 3.5 5.5 4.7 1.7 4.1 2.9 4.3 4.8 5.8
+ [91] 2.9 2.0 1.3 5.3 5.3 2.5 3.8 4.8 2.3 6.2 2.6 4.3 2.7 6.6 4.5 2.9 1.4 2.1
+[109] 5.7 5.8 4.4 5.9 3.1
+> Ybar <- mean(Y)
+> head(workdat)
+  ID  Stay  Age InfctRsk Cultures Xrays Beds MedSchl Region Census Nurses
+1  1  7.13 55.7      4.1      9.0  39.6  279       2      4    207    241
+2  2  8.82 58.2      1.6      3.8  51.7   80       2      2     51     52
+3  3  8.34 56.9      2.7      8.1  74.0  107       2      3     82     54
+4  4  8.95 53.7      5.6     18.9 122.8  147       2      4     53    148
+5  5 11.20 56.5      5.7     34.5  88.9  180       2      1    134    151
+6  6  9.76 50.9      5.1     21.9  97.0  150       2      2    147    106
+  Services
+1       60
+2       40
+3       20
+4       40
+5       40
+6       40
+> H <- X %*% solve(t(X) %*% X) %*% t(X)
+> max(H %*% H - H)
+[1] 7.802786e-15
+> Yhat <- H %*% Y
+> SSE <- as.numeric(t(Y-Yhat) %*% (Y-Yhat))
+> sigma2 <- as.numeric(SSE/(n-p-1)) 
+> p
+[1] 4
+> beta <- solve(t(X) %*% X) %*% t(X) %*% Y
+> beta
+                 [,1]
+Stay     0.2064464845
+Cultures 0.0594992362
+Age      0.0208569900
+Census   0.0009877639
+Beds     0.0004870812
+> yphat = t(a) %*% beta
+> yphat
+         [,1]
+[1,] 3.467933
+> yphat <- as.numeric(yphat)
+> yphat + c(1,-1)%*%qt(0.975,n-p-1)%*%sqrt(t)
+Error in c(1, -1) %*% qt(0.975, n - p - 1) : non-conformable arguments
+> yphat + c(1,-1)*qt(0.975,n-p-1)*sqrt(sigma2*(1+t))
+[1] 5.475361 1.460505
+> yphat + c(1,-1)*qt(0.95,n-p-1)*sqrt(sigma2*(1+t))
+[1] 5.148157 1.787710
+> ?predict
+starting httpd help server ... done
+> predict(workdat$InfctRsk.lm, newdata=list(Stay=7,Cultures=9,Age=56,Census=200,Beds=250), interval="confidence", level=.95)
+Error in UseMethod("predict") : 
+  no applicable method for 'predict' applied to an object of class "NULL"
+> predict(workdat$InfctRsk, newdata=list(Stay=7,Cultures=9,Age=56,Census=200,Beds=250), interval="confidence", level=.95)
+Error in UseMethod("predict") : 
+  no applicable method for 'predict' applied to an object of class "c('double', 'numeric')"
+> predict(Y.lm, newdata=list(Stay=7,Cultures=9,Age=56,Census=200,Beds=250), interval="confidence", level=.95)
+Error in predict(Y.lm, newdata = list(Stay = 7, Cultures = 9, Age = 56,  : 
+  object 'Y.lm' not found
+> predict(Y, newdata=list(Stay=7,Cultures=9,Age=56,Census=200,Beds=250), interval="confidence", level=.95)
+Error in UseMethod("predict") : 
+  no applicable method for 'predict' applied to an object of class "c('double', 'numeric')"
+> predict(fit, newdata=list(Stay=7,Cultures=9,Age=56,Census=200,Beds=250), interval="prediction", level=.95)
+       fit      lwr     upr
+1 3.465525 1.448601 5.48245
+> new <- data.frame(x = seq(7,9,56,200,250))
+Error in seq.default(7, 9, 56, 200, 250) : too many arguments
+> fit
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census + Beds, 
+    data = workdat)
+
+Coefficients:
+(Intercept)         Stay     Cultures          Age       Census  
+  0.2051282    0.2055252    0.0590369    0.0173637    0.0010306  
+       Beds  
+  0.0004476  
+
+> summary(fit)
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census + Beds, 
+    data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1658 -0.8085  0.1343  0.5928  2.4293 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.2051282  1.2075929   0.170   0.8654    
+Stay        0.2055252  0.0660885   3.110   0.0024 ** 
+Cultures    0.0590369  0.0103096   5.726  9.5e-08 ***
+Age         0.0173637  0.0229966   0.755   0.4519    
+Census      0.0010306  0.0034942   0.295   0.7686    
+Beds        0.0004476  0.0026781   0.167   0.8676    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9926 on 107 degrees of freedom
+Multiple R-squared:  0.4765,    Adjusted R-squared:  0.4521 
+F-statistic: 19.48 on 5 and 107 DF,  p-value: 9.424e-14
+
+> qt(0.025,n-6)
+[1] -1.982383
+> qt(0.975,n-6)
+[1] 1.982383
+> p
+[1] 4
+> n
+[1] 113
+> q()
+> save.image("C:\\Users\\Kelvin\\Documents\\Homework\\Coursework\\yr3sem1\\STAT 331\\a2.RData")
+> 

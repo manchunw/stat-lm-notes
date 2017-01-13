@@ -1,0 +1,370 @@
+> setwd("/Users/Kelvin/Documents/Homework/Coursework/yr3sem1/STAT 331")
+> workdat <- read.table("senic.txt", header=T)
+> attach(workdat)
+> summary(lm(InfctRsk ~ Stay,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Stay, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7823 -0.7039  0.1281  0.6767  2.5859 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.74430    0.55386   1.344    0.182    
+Stay         0.37422    0.05632   6.645 1.18e-09 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.139 on 111 degrees of freedom
+Multiple R-squared:  0.2846,    Adjusted R-squared:  0.2781 
+F-statistic: 44.15 on 1 and 111 DF,  p-value: 1.177e-09
+
+> summary(lm(InfctRsk ~ Cultures,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6759 -0.7133  0.1593  0.7966  3.1860 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  3.19790    0.19377  16.504  < 2e-16 ***
+Cultures     0.07326    0.01031   7.106 1.22e-10 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.117 on 111 degrees of freedom
+Multiple R-squared:  0.3127,    Adjusted R-squared:  0.3065 
+F-statistic: 50.49 on 1 and 111 DF,  p-value: 1.218e-10
+
+> summary(lm(InfctRsk ~ Age,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Age, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0574 -0.6568  0.0455  0.8457  3.4483 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)   
+(Intercept) 4.3373782  1.5237868   2.846  0.00527 **
+Age         0.0003285  0.0285263   0.012  0.99083   
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.347 on 111 degrees of freedom
+Multiple R-squared:  1.195e-06, Adjusted R-squared:  -0.009008 
+F-statistic: 0.0001326 on 1 and 111 DF,  p-value: 0.9908
+
+> summary(lm(InfctRsk ~ Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6177 -0.7974  0.1127  0.6973  3.6992 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 3.7183242  0.1875149  19.829  < 2e-16 ***
+Census      0.0033262  0.0007652   4.347 3.07e-05 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.245 on 111 degrees of freedom
+Multiple R-squared:  0.1455,    Adjusted R-squared:  0.1378 
+F-statistic:  18.9 on 1 and 111 DF,  p-value: 3.072e-05
+
+> summary(lm(InfctRsk ~ Beds,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Beds, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6117 -0.8142  0.0831  0.7259  3.6832 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 3.7240393  0.1951667  19.081  < 2e-16 ***
+Beds        0.0025016  0.0006158   4.062 9.09e-05 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.257 on 111 degrees of freedom
+Multiple R-squared:  0.1294,    Adjusted R-squared:  0.1216 
+F-statistic:  16.5 on 1 and 111 DF,  p-value: 9.087e-05
+
+> summary(lm(InfctRsk ~ Cultures + Stay,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1822 -0.7275  0.1040  0.6847  2.7143 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.805491   0.487756   1.651    0.102    
+Cultures    0.056451   0.009798   5.761 7.70e-08 ***
+Stay        0.275472   0.052465   5.251 7.46e-07 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.003 on 110 degrees of freedom
+Multiple R-squared:  0.4504,    Adjusted R-squared:  0.4404 
+F-statistic: 45.07 on 2 and 110 DF,  p-value: 5.04e-15
+
+> summary(lm(InfctRsk ~ Cultures + Age,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Age, data = workdat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.83609 -0.64432  0.07228  0.77703  2.86540 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.98780    1.33331   0.741   0.4604    
+Cultures     0.07723    0.01050   7.357  3.6e-11 ***
+Age          0.04034    0.02408   1.675   0.0968 .  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.108 on 110 degrees of freedom
+Multiple R-squared:  0.3298,    Adjusted R-squared:  0.3176 
+F-statistic: 27.06 on 2 and 110 DF,  p-value: 2.772e-10
+
+> summary(lm(InfctRsk ~ Cultures + Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.5296 -0.7671  0.0880  0.6825  2.8186 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 2.7752896  0.2077901  13.356  < 2e-16 ***
+Cultures    0.0674946  0.0097321   6.935 2.92e-10 ***
+Census      0.0026840  0.0006478   4.143 6.75e-05 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.043 on 110 degrees of freedom
+Multiple R-squared:  0.4054,    Adjusted R-squared:  0.3946 
+F-statistic: 37.51 on 2 and 110 DF,  p-value: 3.807e-13
+
+> summary(lm(InfctRsk ~ Cultures + Beds,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Beds, data = workdat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.76959 -0.72386  0.06897  0.68692  2.62534 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 2.7772766  0.2132712  13.022  < 2e-16 ***
+Cultures    0.0680002  0.0098243   6.922 3.13e-10 ***
+Beds        0.0019974  0.0005214   3.831 0.000213 ***
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.054 on 110 degrees of freedom
+Multiple R-squared:  0.3936,    Adjusted R-squared:  0.3825 
+F-statistic: 35.69 on 2 and 110 DF,  p-value: 1.131e-12
+
+> summary(lm(InfctRsk ~ Cultures + Stay + Age,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay + Age, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2256 -0.7538  0.1053  0.6855  2.6577 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.397766   1.218092   0.327    0.745    
+Cultures    0.057623   0.010346   5.569 1.86e-07 ***
+Stay        0.269740   0.054957   4.908 3.24e-06 ***
+Age         0.008351   0.022843   0.366    0.715    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 1.007 on 109 degrees of freedom
+Multiple R-squared:  0.4511,    Adjusted R-squared:  0.436 
+F-statistic: 29.86 on 3 and 109 DF,  p-value: 3.621e-14
+
+> summary(lm(InfctRsk ~ Cultures + Stay + Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay + Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1377 -0.7310  0.1401  0.5673  2.6074 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 1.0712055  0.4947688   2.165 0.032564 *  
+Cultures    0.0567516  0.0096355   5.890 4.36e-08 ***
+Stay        0.2176036  0.0579867   3.753 0.000282 ***
+Census      0.0015043  0.0006884   2.185 0.031009 *  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9863 on 109 degrees of freedom
+Multiple R-squared:  0.4735,    Adjusted R-squared:  0.459 
+F-statistic: 32.67 on 3 and 109 DF,  p-value: 3.829e-15
+
+> summary(lm(InfctRsk ~ Cultures + Stay + Beds,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay + Beds, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2708 -0.7553  0.1350  0.5742  2.4703 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.9749084  0.4857529   2.007   0.0472 *  
+Cultures    0.0563041  0.0096339   5.844 5.37e-08 ***
+Stay        0.2278411  0.0559806   4.070 8.93e-05 ***
+Beds        0.0011598  0.0005296   2.190   0.0307 *  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9862 on 109 degrees of freedom
+Multiple R-squared:  0.4736,    Adjusted R-squared:  0.4591 
+F-statistic: 32.68 on 3 and 109 DF,  p-value: 3.793e-15
+
+> summary(lm(InfctRsk ~ Cultures + Stay + Beds + Age,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay + Beds + Age, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2524 -0.8030  0.1231  0.6088  2.3458 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.1793944  1.1993353   0.150 0.881376    
+Cultures    0.0586085  0.0101636   5.767 7.79e-08 ***
+Stay        0.2140072  0.0592522   3.612 0.000463 ***
+Beds        0.0012213  0.0005375   2.272 0.025058 *  
+Age         0.0164769  0.0227026   0.726 0.469548    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9884 on 108 degrees of freedom
+Multiple R-squared:  0.4761,    Adjusted R-squared:  0.4567 
+F-statistic: 24.54 on 4 and 108 DF,  p-value: 1.842e-14
+
+> summary(lm(InfctRsk ~ Cultures + Stay + Beds + Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Cultures + Stay + Beds + Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2139 -0.7469  0.1403  0.5719  2.5303 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 1.0205156  0.5393805   1.892 0.061167 .  
+Cultures    0.0565066  0.0097303   5.807 6.47e-08 ***
+Stay        0.2226932  0.0619304   3.596 0.000489 ***
+Beds        0.0006429  0.0026603   0.242 0.809511    
+Census      0.0006857  0.0034573   0.198 0.843156    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9906 on 108 degrees of freedom
+Multiple R-squared:  0.4738,    Adjusted R-squared:  0.4543 
+F-statistic: 24.31 on 4 and 108 DF,  p-value: 2.337e-14
+
+> summary(lm(InfctRsk ~ Stay + Cultures + Age + Census + Beds,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census + Beds, 
+    data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1658 -0.8085  0.1343  0.5928  2.4293 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.2051282  1.2075929   0.170   0.8654    
+Stay        0.2055252  0.0660885   3.110   0.0024 ** 
+Cultures    0.0590369  0.0103096   5.726  9.5e-08 ***
+Age         0.0173637  0.0229966   0.755   0.4519    
+Census      0.0010306  0.0034942   0.295   0.7686    
+Beds        0.0004476  0.0026781   0.167   0.8676    
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9926 on 107 degrees of freedom
+Multiple R-squared:  0.4765,    Adjusted R-squared:  0.4521 
+F-statistic: 19.48 on 5 and 107 DF,  p-value: 9.424e-14
+
+> summary(lm(InfctRsk ~ Stay + Cultures + Age + Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Age + Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1310 -0.7811  0.1308  0.5867  2.4804 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.2226604  1.1976010   0.186  0.85285    
+Stay        0.2016478  0.0616029   3.273  0.00143 ** 
+Cultures    0.0592600  0.0101767   5.823 6.02e-08 ***
+Age         0.0177349  0.0227858   0.778  0.43808    
+Census      0.0016026  0.0007011   2.286  0.02421 *  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9881 on 108 degrees of freedom
+Multiple R-squared:  0.4764,    Adjusted R-squared:  0.457 
+F-statistic: 24.57 on 4 and 108 DF,  p-value: 1.789e-14
+
+> summary(lm(InfctRsk ~ Stay + Cultures + Census,workdat))
+
+Call:
+lm(formula = InfctRsk ~ Stay + Cultures + Census, data = workdat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1377 -0.7310  0.1401  0.5673  2.6074 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 1.0712055  0.4947688   2.165 0.032564 *  
+Stay        0.2176036  0.0579867   3.753 0.000282 ***
+Cultures    0.0567516  0.0096355   5.890 4.36e-08 ***
+Census      0.0015043  0.0006884   2.185 0.031009 *  
+---
+Signif. codes:  0 ．***・ 0.001 ．**・ 0.01 ．*・ 0.05 ．.・ 0.1 ． ・ 1
+
+Residual standard error: 0.9863 on 109 degrees of freedom
+Multiple R-squared:  0.4735,    Adjusted R-squared:  0.459 
+F-statistic: 32.67 on 3 and 109 DF,  p-value: 3.829e-15
+
+> 
